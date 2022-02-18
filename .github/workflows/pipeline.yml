@@ -1,0 +1,35 @@
+name: cpplint/cppcheck
+on:
+  push:
+    tags:
+      - v*
+    branches:
+      - master
+      - main
+  pull_request:
+permissions:
+  contents: read
+ 
+jobs:
+  build:
+      runs-on: ubuntu-latest
+
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v2
+
+        - name: Build dependencies
+          run: sudo apt get install cmake
+
+        - name: Build
+          run: make build
+  cppcheck:
+    name: check and lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: dev deps
+        run: make dev-deps
+      
+      - name: check and lint
+        run: make check
