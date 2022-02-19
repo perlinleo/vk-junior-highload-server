@@ -1,6 +1,3 @@
-PROJECT_DIR := ${CURDIR}
-
-
 ## build: rebuild
 build:
 	mkdir -p build && \
@@ -25,8 +22,8 @@ check:
 	cppcheck --enable=all --language=c */*.c */*/*.h
 	cpplint --extensions=c */*.c
 
-.PHONY: all run help build
-all: help run
+.PHONY: all help build
+all: help 
 help: Makefile
 	@echo
 	@echo " Choose a command to run:"

@@ -1,4 +1,4 @@
-name: cpplint/cppcheck
+name: cpplint/cppcheck/build
 on:
   push:
     tags:
