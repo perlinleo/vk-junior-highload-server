@@ -31,7 +31,7 @@ cmake_minimum_required(VERSION 3.7.2)
 project(highload-c-webserver)
 
 # CMAKE FLAGS
-set(CMAKE_C_FLAGS "-pedantic -fprofile-arcs -ftest-coverage")
+set(CMAKE_C_FLAGS "-pedantic -fprofile-arcs -ftest-coverage -g")
 
 
 # LIB
