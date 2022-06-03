@@ -1,10 +1,27 @@
-# FROM ibmcom/cmakeLlatest as build
+FROM ubuntu:20.04 AS release
 
-# WORKDIR /build
+RUN apt-get update
+RUN apt-get install -y tzdata
 
-# RUN make build && \
-#     mv lib*.a /usr/lib
+ENV TZ=Russia/Moscow
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-# ADD ./src /app/src
+RUN  yes | apt-get install make \
+                           g++ \
+                           cmake
 
-# RUN cmake ../
+WORKDIR /app
+
+COPY . .
+
+COPY ./httpd.conf /etc/httpd.conf
+
+COPY ./httptest ./var/www/html/httptest
+
+RUN mkdir ./build && cd ./build
+RUN cmake -DCMAKE_BUILD_TYPE=Release ./
+RUN make
+
+EXPOSE 80
+
+CMD ./highload_server

@@ -18,6 +18,13 @@ dev-deps:
 	sudo pip3 install cpplint
 
 
+## run-nginx: Run nginx server in docker on 8888 port
+run-nginx:
+	docker run -d --rm -p 8888:8888 --name nginx -t nginx
+
+build-nginx:
+	docker build -t nginx ./nginx-test
+
 check:
 	cppcheck --enable=all --language=c */*.c */*/*.h
 	cpplint --extensions=c */*.c

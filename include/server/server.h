@@ -1,18 +1,21 @@
-#ifndef SERVER_H
-#define SERVER_H
+#ifndef STATIC_SERVER_SERVER_H
+#define STATIC_SERVER_SERVER_H
 
-#include <stdint.h>
+#include <string>
+#include <memory>
+
 #include "config/config.h"
 #include "client/client.h"
 
-struct server {
-    uint16_t socket;
-    config conf;
+class Server {
+public:
+    Server(int port, Config* config);
+    ~Server();
+    std::shared_ptr<Client>connect();
+private:
+    int socket;
+    std::string document_root;
 };
 
-typedef struct server server;
 
-int create_server(uint16_t port, config* conf,server* serv);
-int connect_server(server* serv, client* c);
-
-#endif //SERVER_H
+#endif //STATIC_SERVER_SERVER_H

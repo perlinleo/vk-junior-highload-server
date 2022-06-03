@@ -1,17 +1,14 @@
-#ifndef CONFIG_H
-#define CONFIG_H
+#ifndef STATIC_SERVER_CONFIG_H
+#define STATIC_SERVER_CONFIG_H
 
-#include <stdint.h>
+#include <string>
 
-#define DOCUMENT_ROOT_MAX_LENGTH 100
-
-struct config {
-    uint8_t cpu_limit;
-    char document_root[DOCUMENT_ROOT_MAX_LENGTH];
+class Config {
+public:
+    int cpu_limit;
+    std::string document_root;
+    int readConfig(const std::string path);
 };
 
-typedef struct config config;
 
-int read_config(char* path, config* conf);
-
-#endif //CONFIG_H
+#endif //STATIC_SERVER_CONFIG_H
